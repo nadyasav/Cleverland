@@ -1,0 +1,41 @@
+.close_btn{
+  border:none;
+  width:24px;
+  height:24px;
+  padding:5px;
+  cursor:pointer;
+  display:block;
+  background:transparent;
+  position:relative;
+  margin:auto 0;
+  margin-left:10px;
+}
+.close_btn__line{
+  transform:rotate(45deg);
+  position:absolute;
+  left:calc(50% - 2px);
+  top:0;
+  content:'';
+  height:100%;
+  width:2px;
+  background-color:var(--main-color);;
+  border-radius:10px;
+}
+.close_btn__line:last-child {
+  transform:rotate(-45deg);
+}
+@media only screen and (max-width:800px) {
+  .close_btn{
+    margin-top:10px;
+    width:18px;
+    height:18px;
+  }
+  .close_btn__line{
+    width:1.5px;
+  }
+}
+@media only screen and (max-width:400px) {
+  .close_btn{
+    margin-top:0;
+  }
+}

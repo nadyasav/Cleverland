@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+body {
+  height:100%;
+  justify-content:center;
+  scroll-behavior:smooth;
+  text-rendering:optimizeSpeed;
+  font-family:'Montserrat', sans-serif;
+  font-size:14px;
+  line-height:18px;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-color:#ffffff;
+  color:#363636;
+  letter-spacing:0.1px;
+}
+*,
+*:before,
+*:after {
+  box-sizing:border-box;
+}
+ul,
+ol {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin:0;
+}
+a {
+  text-decoration:none;
+  color:inherit;
+}
+a:not([class]) {
+  text-decoration-skip-ink:auto;
+}
+img {
+  max-width:100%;
+  display:block;
+}
+article > * + * {
+  margin-top:1em;
+}
+input,
+button,
+textarea,
+select {
+  padding:0;
+  font:inherit;
+}
+input:focus,
+button:focus,
+select:focus {
+  outline:none !important;
+}
+html, #root{
+  height:100%;
+}
+:root {
+  --wrapper-width:1142px;
+  --wrapper-padding:0 16px;
+  --main-bg:#ffffff;
+  --main-color:#363636;
+  --error-color:#F42C4F;
+  --toastify-color-error:var(--error-color);
+}
+.layout{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+.main{
+  flex:1 0 auto;
+}
+.Toastify__toast-container{
+  max-width:var(--wrapper-width);
+  padding:var(--wrapper-padding);
+  width:100%;
+  top:64px;
+}
+.Toastify__toast {
+  font-weight:600;
+  font-size:16px;
+  line-height:1.5;
+  color:var(--main-color);
+  box-shadow:none;
+  min-height:80px;
+  padding:12px 27px 12px 32px;
+  border-radius:5px;
+  border:1.5px solid transparent;
+}
+.Toastify__toast-icon{
+  width:25px;
+  margin-inline-end:28px;
+}
+.Toastify__toast--error{
+  background:#FEEBEA;
+  border-color:var(--error-color);
+}
+.Toastify__close-button--light{
+  opacity:1;
+}
+.Toastify__toast-body{
+  padding:0;
+}
+@media only screen and (max-width:800px) {
+  :root {
+    --wrapper-width:672px;
+  }
+  .Toastify__toast {
+    font-size:14px;
+    line-height:1.28;
+    padding:12px 11px 12px 16px;
+    min-height:72px;
+  }
+  .Toastify__toast-icon{
+    width:19px;
+    margin-inline-end:14px;
+  }
+}
+@media only screen and (max-width:400px) {
+  .Toastify__toast-container{
+    top:56px;
+  }
+  .Toastify__toast-body{
+    align-items:flex-start;
+  }
+}

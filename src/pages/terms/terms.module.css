@@ -1,0 +1,41 @@
+.terms{
+  font-size:16px;
+  line-height:1.5;
+}
+.terms__title{
+  font-weight:700;
+  font-size:32px;
+  line-height:1.25;
+}
+.terms__list{
+  padding-top:32px;
+}
+.terms__list > li{
+  margin-top:32px;
+}
+.terms__list > li:first-child{
+  margin-top:0;
+}
+.terms__list > li > span{
+  font-weight:600;
+}
+.terms__list > li li{
+  margin-top:16px;
+  padding-left:30px;
+}
+@media only screen and (max-width:420px) {
+  .terms{
+    margin-top:13px;
+  }
+  .terms__title{
+    font-size:18px;
+    line-height:1.55;
+  }
+  .terms__list{
+    padding-top:24px;
+  }
+  .terms__list > li li{
+    font-size:15px;
+    line-height:20px;
+  }
+}

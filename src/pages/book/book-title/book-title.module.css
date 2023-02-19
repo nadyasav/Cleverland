@@ -1,0 +1,70 @@
+.title,
+.dropdown_btn__box{
+  font-weight:700;
+  font-size:18px;
+  line-height:1.55;
+  color:var(--main-color);
+  padding-bottom:16px;
+  border-bottom:1px solid #EBEBEB;
+}
+.dropdown_btn{
+  border:none;
+  background:none;
+  position:relative;
+  padding-right:48px;
+  display:inline-block;
+  height:100%;
+  cursor:pointer;
+}
+.title.styles_Inherit,
+.dropdown_btn__box.styles_Inherit{
+  font-size:inherit;
+  font-weight:inherit;
+}
+.title.close,
+.dropdown_btn__box.close{
+  border-bottom:none;
+  padding-bottom:0;
+}
+.dropdown_btn::after{
+  position:absolute;
+  content:'';
+  background-image:url('../../../assets/img/chevron.svg');
+  right:5px;
+  top:10px;
+  height:8px;
+  width:14px;
+  transform:rotate(0);
+  filter:brightness(0) saturate(100%) invert(19%) sepia(7%) saturate(12%) hue-rotate(11deg) brightness(90%) contrast(88%);
+}
+.close .dropdown_btn::after{
+  transform:rotate(180deg);
+}
+.dropdown_btn span{
+  color:#A7A7A7;
+  font-size:14px;
+  line-height:1.7;
+  font-weight:400;
+}
+@media only screen and (max-width:800px) {
+  .title,
+  .dropdown_btn__box{
+    font-weight:600;
+    font-size:16px;
+    line-height:1.5;
+  }
+}
+@media only screen and (max-width:500px) {
+  .title,
+  .dropdown_btn__box{
+    font-weight:700;
+    font-size:18px;
+    line-height:1.55;
+  }
+}
+@media only screen and (max-width:320px) {
+  .title,
+  .dropdown_btn__box{
+    padding-bottom:8px;
+  }
+}
