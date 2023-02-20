@@ -49,7 +49,7 @@ export const NavMenu = (props: {
         data-test-id={props.testId.nav}
       >
         <ul className={styles.nav__list}>
-          <li className={cn(styles.dropdown, categories.length === 0 && styles.empty)}>
+          <li className={cn(styles.dropdown, !categories.length && styles.empty)}>
             <NavLink
               className={({ isActive }) =>
                 cn(styles.nav__link, isActive && styles.active, dropdownState && isActive && styles.open)

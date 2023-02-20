@@ -35,7 +35,7 @@ export interface ICard {
   title: string;
   authors: string[] | null;
   image: { url: string } | null;
-  categories: string[];
+  categories: string[] | null;
   id: number;
   booking: IBooking | null;
   delivery: IDelivery | null;
@@ -64,4 +64,39 @@ export interface IDelivery {
 export interface IHistory {
   id: number | null;
   userId: number | null;
+}
+
+export interface IComment {
+  id: number;
+  rating: number;
+  text: string | null;
+  createdAt: string;
+  user: {
+    commentUserId: number;
+    firstName: string;
+    lastName: string;
+    avatarUrl: string | null;
+  } | null;
+}
+
+export interface IBook {
+  id: number;
+  title: string;
+  rating: number | null;
+  issueYear: string | null;
+  description: string | null;
+  publish: string | null;
+  pages: string | null;
+  cover: string | null;
+  weight: string | null;
+  format: string | null;
+  ISBN: string | null;
+  producer: string | null;
+  authors: string[] | null;
+  images: Array<{ url: string }> | null;
+  categories: string[] | null;
+  comments: IComment[] | null;
+  booking: IBooking | null;
+  delivery: IDelivery | null;
+  history: IHistory[] | null;
 }

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+/* eslint-disable complexity */
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import cn from 'classnames';
 
 import { BaseBtn } from '../../components/base-btn/base-btn';
 import { Breadcrumbs } from '../../components/breadcrumbs/breadcrumbs';
-import dataCategories from '../../components/nav-menu/data-categories.json';
+import { Preloader } from '../../components/preloader/preloader';
 import { RatingView } from '../../components/rating/rating-view';
-import { ROUTES } from '../../constants';
-import { dataCards } from '../main/data-cards';
+import { REQUEST_ERRORS, REQUEST_STATUS, ROUTES, TOAST_SETTINGS } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
+import { fetchBook, setBook, setBookError } from '../../store/book-slice';
+import { fetchCategories, setCategoriesError } from '../../store/categories-slice';
 
 import { BookDetail } from './book-detail/book-detail';
 import { BookInfoList } from './book-info-list/book-info-list';
@@ -18,9 +22,11 @@ import styles from './book-page.module.css';
 
 export const BookPage = () => {
   const { category, bookId } = useParams();
-  const categoryName = dataCategories.find((item) => item.category === category);
-  const book = dataCards.find((item) => String(item.id) === bookId);
-  const [dropdownCommentsState, setDropdownCommentsState] = useState(!book?.reviews.length);
+  const dispatch = useAppDispatch();
+  const { categories, categoriesStatus, categoriesError } = useAppSelector((state) => state.categories);
+  const [categoryName, setCategoryName] = useState('');
+  const { book, bookStatus, bookError } = useAppSelector((state) => state.book);
+  const [dropdownCommentsState, setDropdownCommentsState] = useState(!book?.comments?.length);
   const handleDropdownOnClick = () => {
     setDropdownCommentsState(!dropdownCommentsState);
   };
@@ -28,7 +34,7 @@ export const BookPage = () => {
     {
       id: 1,
       path: category || '',
-      name: categoryName?.title || 'Все книги',
+      name: categoryName || 'Все книги',
     },
     {
       id: 2,
@@ -36,6 +42,39 @@ export const BookPage = () => {
       name: book?.title || '',
     },
   ];
+
+  useEffect(
+    () => () => {
+      dispatch(setCategoriesError(''));
+      dispatch(setBookError(''));
+      dispatch(setBook(null));
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (!categories.length) {
+      dispatch(fetchCategories());
+    } else if (categories.length && !categoryName) {
+      const catName = categories.find((item) => item.path === category);
+
+      setCategoryName(catName ? catName.name : '');
+    }
+  }, [categories, category, categoryName, dispatch]);
+
+  useEffect(() => {
+    if (bookId) {
+      dispatch(fetchBook(bookId));
+    }
+  }, [bookId, dispatch]);
+
+  useEffect(() => {
+    if (categoriesStatus !== REQUEST_STATUS.pending && bookStatus !== REQUEST_STATUS.pending) {
+      if (categoriesError || bookError) {
+        toast.error(REQUEST_ERRORS.common, { toastId: 'bookPageToast' });
+      }
+    }
+  }, [categoriesError, bookError, categoriesStatus, bookStatus]);
 
   return (
     <section className={styles.book_page}>
@@ -50,10 +89,10 @@ export const BookPage = () => {
               </div>
               <div className={styles.book_page__rating}>
                 <div className={styles.book_page__rating_stars}>
-                  <RatingView count={book.rating} />
+                  <RatingView count={book.rating ? book.rating : 0} />
                 </div>
-                {book.rating > 0 && <BookTitle close={true}>{book.rating}</BookTitle>}
-                {book.rating <= 0 && <p className={styles.book_page__rating_text}>ещё нет оценок</p>}
+                {book.rating && book.rating > 0 && <BookTitle close={true}>{book.rating}</BookTitle>}
+                {book.rating && book.rating <= 0 && <p className={styles.book_page__rating_text}>ещё нет оценок</p>}
               </div>
             </div>
             <div className={styles.book_page__info_box}>
@@ -62,10 +101,25 @@ export const BookPage = () => {
               </div>
               <div className={styles.book_page__info}>
                 <div className={styles.book_page__info_list}>
-                  <BookInfoList infoArr={book.info.slice(0, 5)} />
+                  <BookInfoList
+                    infoArr={[
+                      { id: '1', key: 'Издательство', value: book.publish || '' },
+                      { id: '2', key: 'Год издания', value: book.issueYear || '' },
+                      { id: '3', key: 'Страниц', value: book.pages || '' },
+                      { id: '4', key: 'Переплёт', value: book.cover || '' },
+                      { id: '5', key: 'Формат', value: book.format || '' },
+                    ]}
+                  />
                 </div>
                 <div className={styles.book_page__info_list}>
-                  <BookInfoList infoArr={book.info.slice(5)} />
+                  <BookInfoList
+                    infoArr={[
+                      { id: '1', key: 'Жанр', value: book.categories || '' },
+                      { id: '2', key: 'Вес', value: book.weight || '' },
+                      { id: '3', key: 'ISBN', value: book.ISBN || '' },
+                      { id: '4', key: 'Изготовитель', value: book.producer || '' },
+                    ]}
+                  />
                 </div>
               </div>
             </div>
@@ -77,13 +131,13 @@ export const BookPage = () => {
                   dropdown={true}
                   handleDropdownOnClick={handleDropdownOnClick}
                 >
-                  Отзывы <span>{book.reviews.length}</span>
+                  Отзывы <span>{book.comments?.length || 0}</span>
                 </BookTitle>
               </div>
-              {book.reviews.length > 0 && (
+              {book.comments && book.comments.length > 0 && (
                 <div className={cn(styles.book_page__reviews, dropdownCommentsState && styles.hidden)}>
                   <ul>
-                    {book.reviews.map((item) => (
+                    {book.comments.map((item) => (
                       <ReviewEl {...item} key={item.id} />
                     ))}
                   </ul>
@@ -98,6 +152,10 @@ export const BookPage = () => {
           </React.Fragment>
         )}
       </div>
+      {(categoriesStatus === REQUEST_STATUS.pending || bookStatus === REQUEST_STATUS.pending) && <Preloader />}
+      <span data-test-id='error'>
+        <ToastContainer {...TOAST_SETTINGS} />
+      </span>
     </section>
   );
 };

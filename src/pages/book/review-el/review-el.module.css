@@ -15,6 +15,7 @@
   height:auto;
   overflow:hidden;
   border-radius:50%;
+  background-color:#F9F9FA;
 }
 .review_el__img {
   width:100%;

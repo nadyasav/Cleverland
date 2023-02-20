@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
 import { Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,7 +8,7 @@ import './book-slider.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-export const BookSlider = (props: { imgArr: Array<{ id: string; img: string }> }) => {
+export const BookSlider = (props: { imgArr: Array<{ url: string }> }) => {
   const [activeSlide, setActiveSlide] = useState<any>();
 
   return (
@@ -24,10 +25,10 @@ export const BookSlider = (props: { imgArr: Array<{ id: string; img: string }> }
         grabCursor={true}
         className='book-slider'
       >
-        {props.imgArr.map((item) => (
-          <SwiperSlide key={item.id} className='book-slide'>
+        {props.imgArr.map((item, index) => (
+          <SwiperSlide key={index} className='book-slide'>
             <div className='book-slide-img__box'>
-              <img className='book-slide-img' alt='book' src={item.img} />
+              <img className='book-slide-img' alt='book' src={`https://strapi.cleverland.by${item.url}`} />
             </div>
           </SwiperSlide>
         ))}
@@ -42,10 +43,10 @@ export const BookSlider = (props: { imgArr: Array<{ id: string; img: string }> }
         grabCursor={true}
         className='book-slider-thumbs'
       >
-        {props.imgArr.map((item) => (
-          <SwiperSlide key={item.id} className='book-slide-thumb' data-test-id='slide-mini'>
+        {props.imgArr.map((item, index) => (
+          <SwiperSlide key={index} className='book-slide-thumb' data-test-id='slide-mini'>
             <div className='book-slide-thumb__img-box'>
-              <img className='book-slide-thumb__img' alt='book' src={item.img} />
+              <img className='book-slide-thumb__img' alt='book' src={`https://strapi.cleverland.by${item.url}`} />
             </div>
           </SwiperSlide>
         ))}

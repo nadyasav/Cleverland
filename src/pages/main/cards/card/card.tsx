@@ -7,6 +7,7 @@ import { BaseBtn } from '../../../../components/base-btn/base-btn';
 import { RatingView } from '../../../../components/rating/rating-view';
 import { ROUTES } from '../../../../constants';
 import { ICard } from '../../../../types/custom-types';
+import { formatDate } from '../../../../utils/format-date';
 
 import styles from './card.module.css';
 
@@ -67,8 +68,12 @@ export const Card = (props: { dataCard: ICard; viewType: string }) => {
             </div>
             <div className={cn(styles.card__author_box, authorState && styles.overflow)}>
               <p className={styles.card__author} ref={authorRef}>
-                {props.dataCard.authors}
-                <span className={styles.card__date}>, {props.dataCard.issueYear}</span>
+                {props.dataCard.authors &&
+                  props.dataCard.authors.length > 0 &&
+                  props.dataCard.authors.reduce((item, value) => `${item}, ${value}`)}
+                <span className={styles.card__date}>
+                  {props.dataCard.issueYear ? `, ${props.dataCard.issueYear}` : ''}
+                </span>
               </p>
               {authorState && <span className={styles.card__dots}>...</span>}
             </div>
@@ -84,7 +89,12 @@ export const Card = (props: { dataCard: ICard; viewType: string }) => {
             </div>
             <div className={styles.card__btn_box}>
               <BaseBtn disabled={!!props.dataCard.delivery?.handed} booked={props.dataCard.booking?.order}>
-                {props.dataCard.delivery?.handed && `занята до ${props.dataCard.delivery?.dateHandedTo}`}
+                {props.dataCard.delivery?.handed &&
+                  `занята до ${
+                    props.dataCard.delivery?.dateHandedTo
+                      ? formatDate(props.dataCard.delivery?.dateHandedTo, false)
+                      : ''
+                  }`}
                 {props.dataCard.booking?.order && 'Забронирована'}
                 {!props.dataCard.delivery?.handed && !props.dataCard.booking?.order && 'Забронировать'}
               </BaseBtn>
