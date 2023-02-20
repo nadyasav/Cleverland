@@ -1,0 +1,31 @@
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+}
+.cards.tile{
+  column-gap:21.5px;
+  row-gap:24px;
+}
+.cards.list{
+  flex-direction:column;
+  row-gap:16px;
+}
+@media only screen and (max-width:800px) {
+  .cards.tile{
+    column-gap:35px;
+    row-gap:32px;
+  }
+}
+@media only screen and (max-width:672px) {
+  .cards.tile{
+    max-width:415px;
+  }
+}
+@media only screen and (max-width:446px) {
+  .cards.tile{
+    max-width:288px;
+  }
+  .cards.tile{
+    row-gap:16px;
+  }
+}

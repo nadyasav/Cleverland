@@ -1,0 +1,26 @@
+.main_page{
+  max-width:825px;
+  width:100%;
+}
+.main_page__cards{
+  margin-top:32px;
+}
+@media only screen and (max-width:800px) {
+  .main_page__cards{
+    margin-top:24px;
+  }
+}
+@media only screen and (max-width:672px) {
+  .main_page__cards{
+    display:flex;
+    justify-content:center;
+  }
+}
+@media only screen and (max-width:420px) {
+  .main_page__cards{
+    margin-top:19px;
+  }
+  .main_page{
+    padding-bottom:38px;
+  }
+}

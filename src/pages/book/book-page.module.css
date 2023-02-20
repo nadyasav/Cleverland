@@ -1,0 +1,146 @@
+.book_page{
+  padding-top:27px;
+}
+.book_page__wrapper{
+  max-width:var(--wrapper-width);
+  padding:var(--wrapper-padding);
+  width:100%;
+  margin:0 auto;
+  margin-top:42px;
+}
+.book_page__rating_box{
+  margin:42px 0;
+}
+.book_page__title_box{
+  max-width:350px;
+  width:100%;
+}
+.book_page__rating{
+  display:flex;
+  align-items:center;
+  column-gap:24px;
+  margin-top:16px;
+}
+.book_page__rating_stars{
+  height:19px;
+  width:168px;
+}
+.book_page__info_box{
+  margin-top:58px;
+}
+.book_page__info{
+  display:flex;
+  justify-content:space-between;
+  column-gap:30px;
+}
+.book_page__info_list:first-child{
+  max-width:445px;
+  width:100%;
+}
+.book_page__reviews_box{
+  margin-top:62px;
+}
+.book_page__reviews{
+  margin-top:16px;
+  max-width:730px;
+  width:100%;
+}
+.book_page__reviews.hidden{
+  height:0;
+  overflow:hidden;
+  margin-top:0;
+}
+.book_page__btn{
+  margin:43px 0 42px;
+  max-width:350px;
+  width:100%;
+  height:52px;
+  border-radius:30px;
+  font-size:16px;
+}
+.book_page__reviews_box .book_page__title_box{
+  font-size:18px;
+  font-weight:700;
+}
+@media only screen and (max-width:800px) {
+  .book_page__wrapper{
+    margin-top:46px;
+  }
+  .book_page__rating_box{
+    margin:52px 0;
+  }
+  .book_page__info_list:first-child,
+  .book_page__info_list{
+    width:calc(50% - 15px);
+  }
+  .book_page__info_box{
+    margin-top:54px;
+  }
+  .book_page__reviews_box{
+    margin-top:52px;
+  }
+  .book_page__btn{
+    margin:43px 0 48px;
+    max-width:100%;
+  }
+}
+@media only screen and (max-width:680px) {
+  .book_page__info{
+    column-gap:15px;
+  }
+  .book_page__info_list:first-child,
+  .book_page__info_list{
+    width:calc(50% - 7px);
+  }
+}
+@media only screen and (max-width:520px) {
+  .book_page__info{
+    flex-direction:column;
+  }
+  .book_page__info_list:first-child,
+  .book_page__info_list{
+    max-width:100%;
+    width:100%;
+  }
+  .book_page__reviews_box{
+    margin-top:42px;
+  }
+  .book_page__reviews{
+    margin-top:8px;
+  }
+  .book_page__btn{
+    margin:20px 0;
+    font-size:12px;
+    height:40px;
+  }
+}
+@media only screen and (max-width:370px) {
+  .book_page__rating{
+    flex-wrap:wrap;
+  }
+  .book_page__rating_text{
+    width:100%;
+    margin-top:13px;
+  }
+  .book_page__info_box{
+    margin-top:26px;
+  }
+}
+@media only screen and (max-width:320px) {
+  .book_page{
+    padding-top:8px;
+  }
+  .book_page__wrapper{
+    margin-top:20px;
+  }
+  .book_page__rating_box{
+    margin:42px 0 24px;
+  }
+  .book_page__rating{
+    margin-top:10px;
+  }
+  .book_page__rating_stars{
+    height:26px;
+    width:218px;
+  }
+}

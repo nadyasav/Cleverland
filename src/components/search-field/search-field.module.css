@@ -1,0 +1,91 @@
+.input__box{
+  height:100%;
+  width:100%;
+  position:relative;
+}
+.input{
+  caret-color:#F83600;
+  border:none;
+  display:block;
+  height:100%;
+  width:100%;
+  padding:10px 40px;
+  color:#A7A7A7;
+  border-radius:20px;
+  box-shadow:0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18), 0px 1px 5px rgba(191, 196, 201, 0.24);
+  position:relative;
+}
+.input::placeholder {
+  color:#A7A7A7;
+}
+.input__icon_loupe_focus{
+  opacity:0;
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+}
+.input__icon_loupe{
+  opacity:1;
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+}
+.input:focus + .input__icon_loupe {
+  opacity:0;
+}
+.input:focus + .input__icon_loupe + .input__icon_loupe_focus {
+  opacity:1;
+}
+.input:focus + .input__icon_loupe + .input__icon_loupe_focus + .input__remove_btn{
+  visibility:visible;
+}
+.input__remove_btn{
+  width:20px;
+  height:20px;
+  padding:5px;
+  border:none;
+  cursor:pointer;
+  display:block;
+  background:transparent;
+  position:absolute;
+  right:19px;
+  top:50%;
+  transform:translateY(-50%);
+  visibility:hidden;
+}
+.input__remove_btn::before,
+.input__remove_btn::after {
+  transform:rotate(45deg);
+  position:absolute;
+  left:50%;
+  top:5px;
+  content:'';
+  height:10px;
+  width:1px;
+  background:linear-gradient(233.73deg, #F83600 -16.08%, #F9D423 327.37%);
+  border-radius:20px;
+}
+.input__remove_btn::after {
+  transform:rotate(-45deg);
+}
+@media only screen and (max-width:410px) {
+  .input__remove_btn{
+    visibility:visible;
+  }
+  .input {
+    padding:7px 16px;
+    font-size:12px;
+    visibility:hidden;
+    transition:visibility 0.3s ease-in;
+  }
+  .open .input {
+    visibility:visible;
+    transition:visibility 0.3s ease-in;
+  }
+  .input__icon_loupe_focus,
+  .input__icon_loupe{
+    display:none;
+  }
+}

@@ -1,0 +1,21 @@
+.rating__stars{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:inherit;
+}
+.rating__star{
+  position:relative;
+  display:inline-block;
+  margin-right:10px;
+  height:100%;
+  width:auto;
+}
+.rating__star_img{
+  width:inherit;
+  height:inherit;
+}
+.rating__star:last-child{
+  margin-right:0;
+}

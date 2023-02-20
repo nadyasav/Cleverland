@@ -1,0 +1,32 @@
+.layout_main{
+  padding-bottom:62px;
+}
+.layout_main__wrapper{
+  max-width:var(--wrapper-width);
+  padding:var(--wrapper-padding);
+  width:100%;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  margin-top:47px;
+}
+.sidebar{
+  min-width:279px;
+  margin-right:6px;
+}
+@media only screen and (max-width:800px) {
+  .layout_main__wrapper{
+    margin-top:32px;
+  }
+  .sidebar{
+    display:none;
+  }
+}
+@media only screen and (max-width:420px) {
+  .layout_main__wrapper{
+    margin-top:11px;
+  }
+  .layout_main{
+    padding-bottom:24px;
+  }
+}

@@ -1,0 +1,60 @@
+.button {
+  width:inherit;
+  min-width:inherit;
+  height:100%;
+  background:linear-gradient(231.58deg, #F83600 -53.35%, #F9D423 297.76%);
+  border:none;
+  font-size:12px;
+  line-height:1.5;
+  padding:11px 22px;
+  color:#ffffff;
+  font-weight:600;
+  cursor:pointer;
+  border-radius:20px;
+  transition:opacity 0.2s ease-in-out;
+  position:relative;
+  z-index:1;
+  text-transform:uppercase;
+}
+.button.styles_Inherit{
+  font-size:inherit;
+  border-radius:inherit;
+}
+.button::before {
+  position:absolute;
+  content:'';
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  border-radius:inherit;
+  background:var(--main-bg);
+  z-index:-1;
+  transition:opacity 0.2s ease-in-out;
+  opacity:0;
+  border:1px solid #A7A7A7;
+}
+.button:hover:not([disabled])::before {
+  opacity:1;
+}
+.button:hover:not([disabled]) {
+  color:#363636;
+  transition:color 0.2s ease-in-out;
+}
+.button:active:not([disabled])::before {
+  box-shadow:0px 3px 4px rgba(222, 125, 11, 0.2), 0px 1px 10px rgba(249, 89, 8, 0.2);
+}
+.button:disabled {
+  background:#EBEBEB;
+  color:#A7A7A7;
+  border:1px solid #A7A7A7;
+  cursor:auto;
+  padding:10px 22px;
+}
+.button.booked:not([disabled])::before {
+  opacity:1;
+  color:#363636;
+}
+.button.booked:not([disabled]) {
+  color:#363636;
+}

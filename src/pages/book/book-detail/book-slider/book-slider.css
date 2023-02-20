@@ -1,0 +1,111 @@
+.swiper-slide.book-slide{
+  width:100% !important;
+  height:auto!important;
+  border-radius:10px;
+  border:1px solid #A7A7A7;
+  overflow:hidden;
+}
+.book-slide-img__box{
+  max-width:445px;
+  overflow:hidden;
+  height:100%;
+}
+.book-slide-img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:left bottom;
+}
+.book-slider-thumbs{
+  width:100% !important;
+  height:100px;
+  margin-top:16px;
+}
+.swiper-slide.book-slide-thumb {
+  border:1px solid #BFC4C9;
+  border-radius:3px;
+  overflow:hidden;
+  height:86px;
+}
+.book-slide-thumb__img-box{
+  width:100%;
+  overflow:hidden;
+  height:86px;
+}
+.book-slide-thumb__img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.swiper-pagination-bullet.swiper-pagination-bullet-active{
+  background:#363636;
+  width:9px;
+  height:9px;
+}
+.swiper-pagination-bullet{
+  background:#BFC4C9;
+  width:7px;
+  height:7px;
+  border-radius:100%;
+  display:inline-block;
+}
+.swiper-slide-thumb-active.swiper-slide.book-slide-thumb{
+  border-color:#F83600;
+}
+.book-slider .swiper-pagination{
+  display:none;
+}
+.swiper-scrollbar{
+  height:6px;
+  margin-top:8px;
+}
+.swiper-scrollbar-drag{
+  background:#A7A7A7;
+  border-radius:4px;
+  height:6px;
+  cursor:pointer;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.swiper-scrollbar-drag:first-child{
+  visibility:hidden;
+  height:0;
+  opacity:0;
+}
+.book-slider-thumbs .swiper-wrapper{
+  height:auto;
+  background:linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 17.19%, rgba(255, 255, 255, 0) 83.33%, #FFFFFF 100%);
+}
+.book-slider-thumbs:hover .swiper-scrollbar-drag,
+.book-slider-thumbs:active .swiper-scrollbar-drag{
+  opacity:1;
+}
+@media only screen and (max-width:865px) {
+  .book-slider__box{
+    max-width:380px;
+  }
+}
+@media only screen and (max-width:800px) {
+  .swiper.book-slider-thumbs{
+    display:none;
+  }
+  .book-slider{
+    min-height:238px;
+  }
+  .swiper-slide.book-slide{
+    height:198px!important;
+  }
+  .book-slider .swiper-pagination{
+    display:block;
+    margin-top:24px;
+    position:relative;
+  }
+}
+@media only screen and (max-width:500px) {
+  .book-slider{
+    min-height:300px;
+  }
+  .swiper-slide.book-slide{
+    height:260px!important;
+  }
+}
