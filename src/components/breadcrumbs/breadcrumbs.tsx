@@ -13,17 +13,21 @@ export const Breadcrumbs = (props: {
       <div className={styles.breadcrumbs__wrapper}>
         <ul className={styles.breadcrumbs__list}>
           {props.items.map((item) => {
-            pathStr += `/${item.path}`;
+            if (item.path) {
+              pathStr += `/${item.path}`;
 
-            return (
-              <li className={styles.breadcrumbs__item} key={item.id}>
-                {item.name && (
-                  <NavLink className={styles.breadcrumbs__link} to={pathStr} data-test-id={item.dataTestId}>
-                    {item.name}
-                  </NavLink>
-                )}
-              </li>
-            );
+              return (
+                <li className={styles.breadcrumbs__item} key={item.id}>
+                  {item.name && (
+                    <NavLink className={styles.breadcrumbs__link} to={pathStr} data-test-id={item.dataTestId}>
+                      {item.name}
+                    </NavLink>
+                  )}
+                </li>
+              );
+            }
+
+            return '';
           })}
         </ul>
       </div>
