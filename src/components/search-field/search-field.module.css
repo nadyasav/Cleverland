@@ -47,13 +47,13 @@
   padding:5px;
   border:none;
   cursor:pointer;
-  display:block;
   background:transparent;
   position:absolute;
   right:19px;
   top:50%;
   transform:translateY(-50%);
   visibility:hidden;
+  display:none;
 }
 .input__remove_btn::before,
 .input__remove_btn::after {
@@ -73,6 +73,7 @@
 @media only screen and (max-width:410px) {
   .input__remove_btn{
     visibility:visible;
+    display:block;
   }
   .input {
     padding:7px 16px;

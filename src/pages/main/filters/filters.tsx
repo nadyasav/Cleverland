@@ -9,6 +9,9 @@ import loupeIcon from '../../../assets/img/loupe.svg';
 import { RadioBtn } from '../../../components/radio-btn/radio-btn';
 import { SearchField } from '../../../components/search-field/search-field';
 import { SortSwitcher } from '../../../components/sort-switcher/sort-switcher';
+import { SORT_TYPE } from '../../../constants';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
+import { setSearchField, setSortType } from '../../../store/filters-slice';
 
 import styles from './filters.module.css';
 
@@ -24,7 +27,10 @@ const dataForSort = [
 ];
 
 export const Filters = (props: { handleViewChange: (value: string) => void }) => {
+  const dispatch = useAppDispatch();
   const [searchFieldState, setSearchFieldState] = useState(false);
+  const { sortType } = useAppSelector((state) => state.filters);
+
   const handleViewOnChange = (value: string) => {
     props.handleViewChange(value);
   };
@@ -35,6 +41,14 @@ export const Filters = (props: { handleViewChange: (value: string) => void }) =>
 
   const closeSearchField = () => {
     setSearchFieldState(false);
+  };
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSortType(e.currentTarget.checked ? SORT_TYPE.desc : SORT_TYPE.asc));
+  };
+
+  const handleSearchFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchField(e.currentTarget.value.trim()));
   };
 
   return (
@@ -54,10 +68,15 @@ export const Filters = (props: { handleViewChange: (value: string) => void }) =>
             placeholder='Поиск книги или автора…'
             openOnMobile={searchFieldState}
             closeSearchField={closeSearchField}
+            handleChange={handleSearchFieldChange}
           />
         </div>
         <div className={cn(styles.filers__sort_switcher, searchFieldState && styles.hidden)}>
-          <SortSwitcher data={dataForSort} defaultChecked={true} />
+          <SortSwitcher
+            data={dataForSort}
+            defaultChecked={sortType === SORT_TYPE.desc ? true : false}
+            handleChange={handleSortChange}
+          />
         </div>
       </div>
       <div className={cn(styles.filers__view, searchFieldState && styles.hidden)}>

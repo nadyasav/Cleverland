@@ -5,6 +5,16 @@
 .main_page__cards{
   margin-top:32px;
 }
+.main_page__error{
+  font-weight:700;
+  font-size:32px;
+  line-height:1.25;
+  color:#A7A7A7;
+  height:100%;
+  display:flex;
+  margin-top:200px;
+  justify-content:center;
+}
 @media only screen and (max-width:800px) {
   .main_page__cards{
     margin-top:24px;
@@ -22,5 +32,10 @@
   }
   .main_page{
     padding-bottom:38px;
+  }
+  .main_page__error{
+    font-size:18px;
+    line-height:1.55;
+    margin-top:137px;
   }
 }

@@ -5,9 +5,11 @@ import cn from 'classnames';
 import stubIcon from '../../../../assets/img/stubIcon.svg';
 import { BaseBtn } from '../../../../components/base-btn/base-btn';
 import { RatingView } from '../../../../components/rating/rating-view';
-import { ROUTES } from '../../../../constants';
+import { API_URL_IMG, ROUTES } from '../../../../constants';
+import { useAppSelector } from '../../../../hooks/redux-hooks';
 import { ICard } from '../../../../types/custom-types';
 import { formatDate } from '../../../../utils/format-date';
+import { getSearchTextHighlighted } from '../../../../utils/get-search-text-highlighted';
 
 import styles from './card.module.css';
 
@@ -17,6 +19,7 @@ export const Card = (props: { dataCard: ICard; viewType: string }) => {
   const authorRef = useRef<HTMLParagraphElement>(null);
   const [titleState, setTitleState] = useState(false);
   const [authorState, setAuthorState] = useState(false);
+  const { searchField } = useAppSelector((state) => state.filters);
 
   const checkOverflow = useCallback(
     (elRef: RefObject<HTMLElement>, setOverflowState: Dispatch<SetStateAction<boolean>>) => {
@@ -45,7 +48,7 @@ export const Card = (props: { dataCard: ICard; viewType: string }) => {
       <div className={cn(styles.card__img_box, !props.dataCard.image?.url && styles.card__icon_box)}>
         <img
           className={styles.card__img}
-          src={props.dataCard.image?.url ? `https://strapi.cleverland.by${props.dataCard.image?.url}` : stubIcon}
+          src={props.dataCard.image?.url ? `${API_URL_IMG}${props.dataCard.image?.url}` : stubIcon}
           alt={props.dataCard.title}
         />
       </div>
@@ -62,7 +65,7 @@ export const Card = (props: { dataCard: ICard; viewType: string }) => {
           <div className={styles.card__description_text}>
             <div className={cn(styles.card__title_box, titleState && styles.overflow)}>
               <h3 className={styles.card__title} ref={titleRef}>
-                {props.dataCard.title}
+                {getSearchTextHighlighted(searchField, props.dataCard.title)}
               </h3>
               {titleState && <span className={styles.card__dots}>...</span>}
             </div>

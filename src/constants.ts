@@ -10,11 +10,12 @@ export const TERMS = {
 };
 export const NAVMENU_TEST_ID = {
   desktop: {
-    nav: 'desk-navigation',
+    nav: '',
     showcase: 'navigation-showcase',
     allBooks: 'navigation-books',
     terms: 'navigation-terms',
     contract: 'navigation-contract',
+    prefix: 'navigation',
   },
   mobile: {
     nav: 'burger-navigation',
@@ -22,9 +23,11 @@ export const NAVMENU_TEST_ID = {
     allBooks: 'burger-books',
     terms: 'burger-terms',
     contract: 'burger-contract',
+    prefix: 'burger',
   },
 };
 export const API_URL = 'https://strapi.cleverland.by';
+export const API_URL_IMG = 'https://strapi.cleverland.by';
 export const REQUEST_STATUS = {
   pending: 'pending',
   fulfilled: 'fulfilled',
@@ -45,4 +48,12 @@ export const TOAST_SETTINGS = {
   pauseOnHover: true as const,
   theme: 'light' as const,
   closeButton: ToastCloseBtn,
+};
+export const SORT_TYPE = {
+  asc: 'asc',
+  desc: 'desc',
+};
+export const FILTER_ERROR = {
+  common: 'По запросу ничего не найдено',
+  category: 'В этой категории книг ещё нет',
 };
