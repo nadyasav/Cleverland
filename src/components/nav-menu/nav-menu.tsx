@@ -8,7 +8,7 @@ import { setMenuState } from '../../store/menu-slice';
 import styles from './nav-menu.module.css';
 
 export const NavMenu = (props: {
-  testId: { nav: string; showcase: string; allBooks: string; terms: string; contract: string };
+  testId: { nav: string; showcase: string; allBooks: string; terms: string; contract: string; prefix: string };
   isMobile?: boolean;
 }) => {
   const { category } = useParams();
@@ -18,6 +18,7 @@ export const NavMenu = (props: {
   const [dropdownState, seDropdownState] = useState(true);
   const location = useLocation();
   const { categories } = useAppSelector((state) => state.categories);
+  const { cards } = useAppSelector((state) => state.cards);
 
   useEffect(() => {
     setCategoryName(category);
@@ -75,13 +76,19 @@ export const NavMenu = (props: {
                 {categories.map((item) => (
                   <li key={item.id}>
                     <Link
-                      data-test-id={props.testId.allBooks}
                       to={`/books/${item.path}`}
                       className={cn(categoryName === item.path && styles.active)}
                       onClick={closeMenu}
                     >
-                      <span className={styles.category_title}>{item.name}</span>
-                      <span className={styles.category_count}>1</span>
+                      <span className={styles.category_title} data-test-id={`${props.testId.prefix}-${item.path}`}>
+                        {item.name}
+                      </span>
+                      <span
+                        className={styles.category_count}
+                        data-test-id={`${props.testId.prefix}-book-count-for-${item.path}`}
+                      >
+                        {cards.filter((card) => card.categories?.includes(item.name)).length}
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -132,7 +139,9 @@ export const NavMenu = (props: {
           </ul>
         )}
       </nav>
-      {menuState && <div className={styles.overlay} onClick={closeMenu} role='presentation' />}
+      {menuState && (
+        <div className={cn(styles.overlay, menuState && styles.active)} onClick={closeMenu} role='presentation' />
+      )}
     </React.Fragment>
   );
 };

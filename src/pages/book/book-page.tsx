@@ -34,12 +34,14 @@ export const BookPage = () => {
     {
       id: 1,
       path: category || '',
-      name: categoryName || 'Все книги',
+      name: category === 'all' ? 'Все книги' : categoryName || '',
+      dataTestId: 'breadcrumbs-link',
     },
     {
       id: 2,
       path: bookId || '',
       name: book?.title || '',
+      dataTestId: 'book-name',
     },
   ];
 

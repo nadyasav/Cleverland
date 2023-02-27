@@ -21,11 +21,17 @@ export const SearchField = React.forwardRef<HTMLInputElement, ISearchField>((pro
     closeSearchField();
   };
 
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (handleChange) {
+      handleChange(e);
+    }
+  };
+
   return (
     <label className={cn(styles.input__box, openOnMobile && styles.open)}>
       <input
         ref={ref}
-        onChange={handleChange}
+        onChange={handleOnChange}
         className={styles.input}
         type='text'
         {...inputProps}

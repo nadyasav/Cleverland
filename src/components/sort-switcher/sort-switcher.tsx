@@ -4,7 +4,10 @@ import styles from './sort-switcher.module.css';
 
 interface ISortSwitcher extends React.InputHTMLAttributes<HTMLInputElement> {
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  data: Array<{ iconUrl: string; title: string }>;
+  data: Array<{
+    iconUrl: string;
+    title: string;
+  }>;
 }
 
 export const SortSwitcher = React.forwardRef<HTMLInputElement, ISortSwitcher>((props, ref) => {
@@ -19,7 +22,7 @@ export const SortSwitcher = React.forwardRef<HTMLInputElement, ISortSwitcher>((p
   };
 
   return (
-    <label className={styles.input__label}>
+    <label className={styles.input__label} data-test-id='sort-rating-button'>
       <input className={styles.input} ref={ref} onChange={handleOnChange} type='checkbox' {...inputProps} />
       <img className={styles.input__icon_first} src={data[0].iconUrl} alt='' />
       <img className={styles.input__icon_second} src={data[1].iconUrl} alt='' />
