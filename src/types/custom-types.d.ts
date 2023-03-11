@@ -100,3 +100,8 @@ export interface IBook {
   delivery: IDelivery | null;
   history: IHistory[] | null;
 }
+
+export interface IValidationParams {
+  login: Array<{ pattern: RegExp; error: string }>;
+  password: Array<{ pattern: RegExp; error: string }>;
+}

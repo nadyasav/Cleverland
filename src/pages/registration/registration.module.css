@@ -1,0 +1,13 @@
+.form{
+  max-width:528px;
+  width:100%;
+  padding:48px 56px;
+  background:#fff;
+  border-radius:16px;
+}
+.input__box{
+  margin-top:36px;
+}
+.input__box:first-child{
+  margin-top:0;
+}

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { Preloader } from '../../components/preloader/preloader';
-import { FILTER_ERROR, REQUEST_ERRORS, REQUEST_STATUS, SORT_TYPE, TOAST_SETTINGS } from '../../constants';
+import { FILTER_ERROR, REQUEST_ERRORS, REQUEST_STATUS, TOAST_SETTINGS } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { fetchCards, setCards, setCardsError } from '../../store/cards-slice';
 import { fetchCategories, setCategoriesError } from '../../store/categories-slice';
