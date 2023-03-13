@@ -14,7 +14,6 @@ interface IInputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   validationMessage?: string;
   error?: string;
   focusValue?: boolean;
-  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholderCustom?: string;
   inputValue?: string;
   invalid?: boolean;
@@ -26,9 +25,9 @@ const InputField = React.forwardRef<HTMLInputElement, IInputFieldProps>((props, 
   const {
     validationMessage = '',
     error = '',
-    handleChange,
     focusValue = false,
     onBlur,
+    onChange,
     placeholderCustom,
     inputValue,
     invalid,
@@ -39,6 +38,7 @@ const InputField = React.forwardRef<HTMLInputElement, IInputFieldProps>((props, 
   } = props;
   const [focus, setFocus] = useState(focusValue);
   const [passwVisibility, setPasswVisibility] = useState(false);
+  const [value, setValue] = useState('');
 
   const handleInputOnFocus = () => {
     setFocus(true);
@@ -63,17 +63,24 @@ const InputField = React.forwardRef<HTMLInputElement, IInputFieldProps>((props, 
     return inputType;
   };
 
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value);
+    if (onChange) {
+      onChange(event);
+    }
+  };
+
   return (
     <div className={cn(styles.input__wrapper, (error || invalid) && styles.invalid)}>
       <div className={cn(styles.input__box, (error || invalid) && styles.invalid)}>
         <input
           ref={ref}
-          onChange={handleChange}
-          className={cn(styles.input, inputValue && styles.not_empty)}
+          className={cn(styles.input, value && styles.not_empty)}
           type={type && getInputType(type)}
           {...inputProps}
           onBlur={handleOnBlur}
           onFocus={handleInputOnFocus}
+          onChange={handleOnChange}
         />
         {placeholderCustom && <span className={styles.input__placeholder}>{placeholderCustom}</span>}
         {type === 'password' && (
