@@ -34,6 +34,7 @@
   text-align:right;
 }
 .header__user_img__box{
+  cursor:pointer;
   margin-left:16px;
   width:58px;
   height:auto;
@@ -48,6 +49,34 @@
 }
 .header__menu_btn{
   display:none;
+}
+.avatar__menu{
+  text-align:right;
+  z-index:10;
+  top:104px;
+  right:0;
+  position:absolute;
+  background:#fff;
+  padding:32px 24px;
+  max-width:270px;
+  width:100%;
+  box-shadow:4px 4px 4px rgba(54, 54, 54, 0.05), -4px 4px 4px rgba(54, 54, 54, 0.05);
+  border-radius:0px 0px 10px 10px;
+  display:none;
+}
+.avatar__menu.active{
+  display:block;
+}
+.avatar__menu_link{
+  font-weight:700;
+  font-size:18px;
+  line-height:28px;
+}
+.avatar__menu li{
+  margin-top:32px;
+}
+.avatar__menu li:first-child{
+  margin-top:0;
 }
 @media only screen and (max-width:800px) {
   .header__logo_box {

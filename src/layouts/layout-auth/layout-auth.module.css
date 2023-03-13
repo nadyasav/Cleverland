@@ -29,3 +29,9 @@
   justify-content:center;
   flex-grow:1;
 }
+@media only screen and (max-width:400px) {
+  .layout_auth__title{
+    font-size:18px;
+    line-height:28px;
+  }
+}

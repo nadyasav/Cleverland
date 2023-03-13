@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
+import { removeUser } from '../../store/authorization-slice';
 import { setMenuState } from '../../store/menu-slice';
 
 import styles from './nav-menu.module.css';
@@ -41,6 +42,10 @@ export const NavMenu = (props: {
     } else {
       closeMenu();
     }
+  };
+
+  const handleExitClick = () => {
+    dispatch(removeUser());
   };
 
   return (
@@ -131,7 +136,7 @@ export const NavMenu = (props: {
               <NavLink
                 className={({ isActive }) => cn(styles.nav__link, isActive && styles.active)}
                 to='/'
-                onClick={handleNavLinkClick}
+                onClick={handleExitClick}
               >
                 Выход
               </NavLink>

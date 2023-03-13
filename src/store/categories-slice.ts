@@ -2,6 +2,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { API_URL, REQUEST_ERRORS, REQUEST_STATUS } from '../constants';
+import { getLocalStorage } from '../utils/get-local-storage';
+
+import { removeUser } from './authorization-slice';
 
 interface ICategory {
   name: string;
@@ -17,8 +20,15 @@ interface ICategoriesSlice {
 
 export const fetchCategories = createAsyncThunk<ICategory[], void, { rejectValue: string }>(
   'categories/fetchCategories',
-  async (_, { rejectWithValue }) =>
-    fetch(`${API_URL}/api/categories`)
+  async (_, { rejectWithValue, dispatch }) =>
+    fetch(`${API_URL}/api/categories`, {
+      method: 'GET',
+      headers: {
+        accept: '*/*',
+        Authorization: `Bearer ${getLocalStorage('token')}`,
+        'Content-Type': 'application/json',
+      },
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -26,7 +36,15 @@ export const fetchCategories = createAsyncThunk<ICategory[], void, { rejectValue
         throw new Error();
       })
       .then((response) => response)
-      .catch(() => rejectWithValue(REQUEST_ERRORS.common)),
+      .catch((error) => {
+        if (error.statusCode === 403) {
+          dispatch(removeUser());
+
+          return rejectWithValue(REQUEST_ERRORS.common);
+        }
+
+        return rejectWithValue(REQUEST_ERRORS.common);
+      }),
   {
     condition: (_, { getState }) => {
       const { categories } = getState() as { categories: ICategoriesSlice };

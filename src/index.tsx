@@ -6,12 +6,14 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from './layouts/layout';
 import { LayoutAuth } from './layouts/layout-auth/layout-auth';
 import { LayoutMain } from './layouts/layout-main/layout-main';
+import { Auth } from './pages/auth/auth';
 import { BookPage } from './pages/book/book-page';
 import { MainPage } from './pages/main/main-page';
 import { Registration } from './pages/registration/registration';
 import { Terms } from './pages/terms/terms';
 import { AuthProtectedRoutes } from './routing/auth-protected-routes';
 import { AuthRoutes } from './routing/auth-routes';
+import { PassRoute } from './routing/pass-route';
 import { store } from './store/store';
 import { ROUTES, TERMS } from './constants';
 
@@ -27,7 +29,9 @@ root.render(
         <Routes>
           <Route element={<AuthRoutes />}>
             <Route element={<LayoutAuth />}>
+              <Route path={ROUTES.auth} element={<Auth />} />
               <Route path={ROUTES.registration} element={<Registration />} />
+              <Route path='/forgot-pass/' element={<PassRoute />} />
             </Route>
           </Route>
           <Route element={<AuthProtectedRoutes />}>

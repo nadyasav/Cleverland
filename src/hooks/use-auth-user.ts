@@ -8,6 +8,6 @@ export function useAuthUser() {
       token,
       userData,
     },
-    userExist: token && userData,
+    userExist: token,
   };
 }

@@ -7,7 +7,7 @@ export const AuthProtectedRoutes = () => {
   const { userExist } = useAuthUser();
 
   if (!userExist) {
-    return <Navigate to={ROUTES.registration} />;
+    return <Navigate to={ROUTES.auth} />;
   }
 
   return <Outlet />;

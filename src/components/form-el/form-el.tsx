@@ -12,9 +12,10 @@ interface IFormEl {
   btnText: string;
   btnDisabled: boolean;
   text: string;
-  link: {
+  link?: {
     title: string;
     path: string;
+    linkArrowIcon: string;
   };
 }
 
@@ -42,18 +43,23 @@ export const FormEl = (props: IFormEl) => {
             {props.btnText}
           </BaseBtn>
         )}
-        {!props.steps ||
-          (props.steps.stepCurrent === props.steps.stepCount && (
-            <BaseBtn disabled={props.btnDisabled} stylesInherit={true} type='submit'>
-              {props.btnText}
-            </BaseBtn>
-          ))}
+        {(!props.steps || props.steps.stepCurrent === props.steps.stepCount) && (
+          <BaseBtn disabled={props.btnDisabled} stylesInherit={true} type='submit'>
+            {props.btnText}
+          </BaseBtn>
+        )}
       </div>
+
       <div className={styles.form_el__bottom}>
         <span className={styles.form_el__text}>{props.text}</span>
-        <NavLink className={styles.form_el__link} to={props.link.path}>
-          {props.link.title}
-        </NavLink>
+        {props.link && (
+          <NavLink className={styles.form_el__link} to={props.link.path}>
+            {props.link.title}
+            {props.link.linkArrowIcon && (
+              <img className={styles.form_el__link_icon} src={props.link.linkArrowIcon} alt='' />
+            )}
+          </NavLink>
+        )}
       </div>
     </div>
   );

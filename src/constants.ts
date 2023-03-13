@@ -6,6 +6,7 @@ export const ROUTES = {
   books: '/books',
   registration: '/registration',
   auth: '/auth',
+  forgotPass: '/forgot-pass/',
 };
 export const TERMS = {
   terms: 'Правила пользования',
@@ -78,7 +79,7 @@ export const VALIDATION_MESSAGE = {
 export const REGEX = {
   latin: /^(?=.*[a-z])/,
   numbers: /\d/,
-  login: /^[a-zA-Z0-9\d@$!%*#?&\-\\_]{1,20}$/,
+  login: /^[a-zA-Z0-9\d@$#&\-\\_]{1,20}$/,
   length: /^(\w{8,})$/,
   capitalLetter: /(?=.*[A-Z])/,
   email: /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,8})+$/,

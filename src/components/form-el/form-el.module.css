@@ -7,7 +7,7 @@
   font-weight:600;
 }
 .form_el__childrens{
-  margin:32px 0 48px;
+  margin:32px 0;
 }
 .form_el__btn{
   height:52px;
@@ -19,6 +19,9 @@
   margin-top:16px;
   font-size:16px;
   line-height:24px;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
 }
 .form_el__text{
   color:#727272;
@@ -30,4 +33,18 @@
   letter-spacing:0.2px;
   text-transform:uppercase;
   margin-left:16px;
+  display:flex;
+  align-items:center;
+}
+.form_el__link_icon{
+  max-width:18px;
+  max-height:12px;
+  margin-left:15px;
+}
+@media only screen and (max-width:400px) {
+  .form_el__btn{
+    height:40px;
+    font-size:12px;
+    line-height:18px;
+  }
 }

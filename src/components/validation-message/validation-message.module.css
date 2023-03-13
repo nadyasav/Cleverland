@@ -6,7 +6,12 @@
   top:calc(100% + 2px);
   left:0;
   padding:0 12px;
+  letter-spacing:0.2px;
+  color:#A7A7A7;
 }
 .accent{
-  color:#FF5253;
+  color:var(--error-color);
+}
+.message.static{
+  position:static;
 }
