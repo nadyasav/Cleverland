@@ -5,7 +5,7 @@ import cn from 'classnames';
 import stubIcon from '../../../../assets/img/stubIcon.svg';
 import { BaseBtn } from '../../../../components/base-btn/base-btn';
 import { RatingView } from '../../../../components/rating/rating-view';
-import { API_URL_IMG, ROUTES } from '../../../../constants';
+import { ROUTES } from '../../../../constants';
 import { useAppSelector } from '../../../../hooks/redux-hooks';
 import { ICard } from '../../../../types/custom-types';
 import { formatDate } from '../../../../utils/format-date';
@@ -48,7 +48,7 @@ export const Card = (props: { dataCard: ICard; viewType: string }) => {
       <div className={cn(styles.card__img_box, !props.dataCard.image?.url && styles.card__icon_box)}>
         <img
           className={styles.card__img}
-          src={props.dataCard.image?.url ? `${API_URL_IMG}${props.dataCard.image?.url}` : stubIcon}
+          src={props.dataCard.image?.url ? props.dataCard.image?.url : stubIcon}
           alt={props.dataCard.title}
         />
       </div>

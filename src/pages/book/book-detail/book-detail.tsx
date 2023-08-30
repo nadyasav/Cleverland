@@ -2,7 +2,6 @@ import cn from 'classnames';
 
 import stubIcon from '../../../assets/img/stubIcon.svg';
 import { BaseBtn } from '../../../components/base-btn/base-btn';
-import { API_URL_IMG } from '../../../constants';
 import { IBook } from '../../../types/custom-types';
 import { formatDate } from '../../../utils/format-date';
 import { BookTitle } from '../book-title/book-title';
@@ -23,7 +22,7 @@ export const BookDetail = (props: IBook) => (
             <img
               className={styles.book__img}
               alt={props?.title}
-              src={props.images && props.images[0] ? `${API_URL_IMG}${props.images[0].url}` : stubIcon}
+              src={props.images && props.images[0] ? props.images[0].url : stubIcon}
             />
           </div>
         )}

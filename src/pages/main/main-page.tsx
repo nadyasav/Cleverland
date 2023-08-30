@@ -123,12 +123,12 @@ export const MainPage = () => {
               <Cards dataCards={filteredCards} viewType={viewCardsType} />
             </div>
           )}
-          {error && error === FILTER_ERROR.category && (
+          {!filteredCards.length && error && error === FILTER_ERROR.category && (
             <div className={styles.main_page__error} data-test-id='empty-category'>
               {error}
             </div>
           )}
-          {error && error === FILTER_ERROR.common && (
+          {!filteredCards.length && error && error === FILTER_ERROR.common && (
             <div className={styles.main_page__error} data-test-id='search-result-not-found'>
               {error}
             </div>

@@ -9,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 export const BookSlider = (props: { imgArr: Array<{ url: string }> }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [activeSlide, setActiveSlide] = useState<any>();
 
   return (
@@ -28,7 +29,7 @@ export const BookSlider = (props: { imgArr: Array<{ url: string }> }) => {
         {props.imgArr.map((item, index) => (
           <SwiperSlide key={index} className='book-slide'>
             <div className='book-slide-img__box'>
-              <img className='book-slide-img' alt='book' src={`https://strapi.cleverland.by${item.url}`} />
+              <img className='book-slide-img' alt='book' src={item.url} />
             </div>
           </SwiperSlide>
         ))}
@@ -46,7 +47,7 @@ export const BookSlider = (props: { imgArr: Array<{ url: string }> }) => {
         {props.imgArr.map((item, index) => (
           <SwiperSlide key={index} className='book-slide-thumb' data-test-id='slide-mini'>
             <div className='book-slide-thumb__img-box'>
-              <img className='book-slide-thumb__img' alt='book' src={`https://strapi.cleverland.by${item.url}`} />
+              <img className='book-slide-thumb__img' alt='book' src={item.url} />
             </div>
           </SwiperSlide>
         ))}

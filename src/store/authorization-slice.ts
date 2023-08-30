@@ -265,8 +265,6 @@ export const authorizationSlice = createSlice({
     });
     builder.addCase(createUser.fulfilled, (state, action) => {
       state.authStatus = REQUEST_STATUS.fulfilled;
-      state.token = action.payload.jwt;
-      state.userData = action.payload;
     });
     builder.addCase(createUser.rejected, (state, action) => {
       state.authStatus = REQUEST_STATUS.rejected;

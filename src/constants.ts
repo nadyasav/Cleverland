@@ -30,8 +30,7 @@ export const NAVMENU_TEST_ID = {
     prefix: 'burger',
   },
 };
-export const API_URL = 'https://strapi.cleverland.by';
-export const API_URL_IMG = 'https://strapi.cleverland.by';
+export const API_URL = 'https://library-cleverland-2jfze.ondigitalocean.app';
 export const REQUEST_STATUS = {
   pending: 'pending',
   fulfilled: 'fulfilled',
