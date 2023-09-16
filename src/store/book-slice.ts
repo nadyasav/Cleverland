@@ -3,6 +3,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { API_URL, REQUEST_ERRORS, REQUEST_STATUS } from '../constants';
 import { IBook } from '../types/custom-types';
+import { getLocalStorage } from '../utils/get-local-storage';
+
+import { removeUser } from './authorization-slice';
 
 interface IBookSlice {
   book: IBook | null;
@@ -12,8 +15,15 @@ interface IBookSlice {
 
 export const fetchBook = createAsyncThunk<IBook, string, { rejectValue: string }>(
   'book/fetchBook',
-  async (id, { rejectWithValue }) =>
-    fetch(`${API_URL}/api/books/${id}`)
+  async (id, { rejectWithValue, dispatch }) =>
+    fetch(`${API_URL}/api/books/${id}`, {
+      method: 'GET',
+      headers: {
+        accept: '*/*',
+        Authorization: `Bearer ${getLocalStorage('token')}`,
+        'Content-Type': 'application/json',
+      },
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -21,7 +31,15 @@ export const fetchBook = createAsyncThunk<IBook, string, { rejectValue: string }
         throw new Error();
       })
       .then((response) => response)
-      .catch(() => rejectWithValue(REQUEST_ERRORS.common)),
+      .catch((error) => {
+        if (error.statusCode === 403) {
+          dispatch(removeUser());
+
+          return rejectWithValue(REQUEST_ERRORS.common);
+        }
+
+        return rejectWithValue(REQUEST_ERRORS.common);
+      }),
   {
     condition: (_, { getState }) => {
       const { book } = getState() as { book: IBookSlice };

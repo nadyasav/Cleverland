@@ -100,3 +100,42 @@ export interface IBook {
   delivery: IDelivery | null;
   history: IHistory[] | null;
 }
+
+export interface IValidationParams {
+  login: Array<{ pattern: RegExp; error: string }>;
+  password: Array<{ pattern: RegExp; error: string }>;
+}
+export interface IRegistrationData {
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+}
+export interface IAuthData {
+  identifier: string;
+  password: string;
+}
+
+export interface IForgotPassData {
+  email: string;
+}
+export interface IResetPassDataForm {
+  password: string;
+  passwordConfirmation: string;
+}
+
+export interface IResetPassData {
+  password: string;
+  passwordConfirmation: string;
+  code: string;
+}
+export interface IFormMessageEl {
+  title: string;
+  message: string;
+  button?: {
+    title: string;
+    handleBtnClick: () => void;
+  };
+}

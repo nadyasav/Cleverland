@@ -4,15 +4,17 @@ export const getSearchTextHighlighted = (searchValue: string, text: string) => {
 
   return (
     <span>
-      {str.map((part, index) =>
-        part.toLowerCase() === searchValue.toLowerCase() ? (
-          <span key={index} className='accent' data-test-id='highlight-matches'>
-            {part}
-          </span>
-        ) : (
-          part
-        )
-      )}
+      {searchValue
+        ? str.map((part, index) =>
+            part.toLowerCase() === searchValue.toLowerCase() ? (
+              <span key={index} className='accent' data-test-id='highlight-matches'>
+                {part}
+              </span>
+            ) : (
+              part
+            )
+          )
+        : text}
     </span>
   );
 };

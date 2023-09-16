@@ -1,8 +1,12 @@
 import { ToastCloseBtn } from './components/toast-close-btn/toast-close-btn';
+import { IValidationParams } from './types/custom-types';
 
 export const ROUTES = {
   main: '/',
   books: '/books',
+  registration: '/registration',
+  auth: '/auth',
+  forgotPass: '/forgot-pass/',
 };
 export const TERMS = {
   terms: 'Правила пользования',
@@ -26,8 +30,7 @@ export const NAVMENU_TEST_ID = {
     prefix: 'burger',
   },
 };
-export const API_URL = 'https://strapi.cleverland.by';
-export const API_URL_IMG = 'https://strapi.cleverland.by';
+export const API_URL = 'https://library-cleverland-2jfze.ondigitalocean.app';
 export const REQUEST_STATUS = {
   pending: 'pending',
   fulfilled: 'fulfilled',
@@ -56,4 +59,58 @@ export const SORT_TYPE = {
 export const FILTER_ERROR = {
   common: 'По запросу ничего не найдено',
   category: 'В этой категории книг ещё нет',
+};
+export const VALIDATION_MESSAGE = {
+  empty: 'Поле не может быть пустым',
+  loginCommon: 'Используйте для логина латинский алфавит и цифры',
+  passwCommon: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+  loginLatin: 'латинский алфавит',
+  loginNumber: 'цифры',
+  passwLength: 'не менее 8 символов',
+  passwCapitalLetter: 'заглавной буквой',
+  passwNumber: 'цифрой',
+  authError: 'Неверный логин или пароль!',
+  recoverEmail: 'На это email  будет отправлено письмо с инструкциями по восстановлению пароля',
+  recoverPassError: 'Пароли не совпадают',
+  phoneError: 'В формате +375 (xx) xxx-xx-xx',
+  emailError: 'Введите корректный e-mail',
+};
+export const REGEX = {
+  latin: /^(?=.*[a-z])/,
+  numbers: /\d/,
+  login: /^[a-zA-Z0-9\d@$#&\-\\_]{1,20}$/,
+  length: /^(\w{8,})$/,
+  capitalLetter: /(?=.*[A-Z])/,
+  email: /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,8})+$/,
+};
+
+export const validationParams: IValidationParams = {
+  login: [
+    {
+      pattern: REGEX.login,
+      error: `${VALIDATION_MESSAGE.loginLatin} ${VALIDATION_MESSAGE.loginNumber}`,
+    },
+    {
+      pattern: REGEX.latin,
+      error: VALIDATION_MESSAGE.loginLatin,
+    },
+    {
+      pattern: REGEX.numbers,
+      error: VALIDATION_MESSAGE.loginNumber,
+    },
+  ],
+  password: [
+    {
+      pattern: REGEX.length,
+      error: VALIDATION_MESSAGE.passwLength,
+    },
+    {
+      pattern: REGEX.capitalLetter,
+      error: VALIDATION_MESSAGE.passwCapitalLetter,
+    },
+    {
+      pattern: REGEX.numbers,
+      error: VALIDATION_MESSAGE.passwNumber,
+    },
+  ],
 };

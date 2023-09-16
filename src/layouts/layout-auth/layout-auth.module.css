@@ -1,0 +1,37 @@
+.layout_auth{
+  padding:17.58vh 0;
+  background:linear-gradient(231.58deg, #F83600 -53.35%, #F9D423 297.76%);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+.layout_auth__wrapper{
+  max-width:var(--wrapper-width);
+  padding:var(--wrapper-padding);
+  width:100%;
+  margin:0 auto;
+  padding-bottom:86px;
+  flex-grow:1;
+  display:flex;
+  flex-direction:column;
+}
+.layout_auth__title{
+  font-weight:700;
+  font-size:32px;
+  line-height:40px;
+  color:#fff;
+  text-align:center;
+  margin-bottom:46px;
+}
+.layout_auth__inner{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-grow:1;
+}
+@media only screen and (max-width:400px) {
+  .layout_auth__title{
+    font-size:18px;
+    line-height:28px;
+  }
+}

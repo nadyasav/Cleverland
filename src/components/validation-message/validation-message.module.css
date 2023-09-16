@@ -1,0 +1,17 @@
+.message {
+  font-weight:500;
+  font-size:12px;
+  line-height:16px;
+  position:absolute;
+  top:calc(100% + 2px);
+  left:0;
+  padding:0 12px;
+  letter-spacing:0.2px;
+  color:#A7A7A7;
+}
+.accent{
+  color:var(--error-color);
+}
+.message.static{
+  position:static;
+}

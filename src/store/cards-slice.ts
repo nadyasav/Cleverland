@@ -3,6 +3,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { API_URL, REQUEST_ERRORS, REQUEST_STATUS } from '../constants';
 import { ICard } from '../types/custom-types';
+import { getLocalStorage } from '../utils/get-local-storage';
+
+import { removeUser } from './authorization-slice';
 
 interface ICardsSlice {
   cards: ICard[];
@@ -12,8 +15,15 @@ interface ICardsSlice {
 
 export const fetchCards = createAsyncThunk<ICard[], void, { rejectValue: string }>(
   'cards/fetchCards',
-  async (_, { rejectWithValue }) =>
-    fetch(`${API_URL}/api/books`)
+  async (_, { rejectWithValue, dispatch }) =>
+    fetch(`${API_URL}/api/books`, {
+      method: 'GET',
+      headers: {
+        accept: '*/*',
+        Authorization: `Bearer ${getLocalStorage('token')}`,
+        'Content-Type': 'application/json',
+      },
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -21,7 +31,15 @@ export const fetchCards = createAsyncThunk<ICard[], void, { rejectValue: string 
         throw new Error();
       })
       .then((response) => response)
-      .catch(() => rejectWithValue(REQUEST_ERRORS.common)),
+      .catch((error) => {
+        if (error.statusCode === 403) {
+          dispatch(removeUser());
+
+          return rejectWithValue(REQUEST_ERRORS.common);
+        }
+
+        return rejectWithValue(REQUEST_ERRORS.common);
+      }),
   {
     condition: (_, { getState }) => {
       const { cards } = getState() as { cards: ICardsSlice };
